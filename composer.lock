@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1ab15bb241c5055a59f3f3178712e2b2",
+    "content-hash": "fab93d156d7c0ba72544ebc1d9173ce6",
     "packages": [
         {
             "name": "dibi/dibi",
@@ -76,6 +76,50 @@
                 "source": "https://github.com/dg/dibi/tree/v5.0.2"
             },
             "time": "2024-09-03T01:18:11+00:00"
+        },
+        {
+            "name": "dikki/dotenv",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/namankumar80510/DikkiDotEnv.git",
+                "reference": "a40087a4ff37b82aecb6d2c0067c541d203f6403"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/namankumar80510/DikkiDotEnv/zipball/a40087a4ff37b82aecb6d2c0067c541d203f6403",
+                "reference": "a40087a4ff37b82aecb6d2c0067c541d203f6403",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Dikki\\DotEnv\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Naman Kumar",
+                    "email": "namankumar80510@gmail.com"
+                }
+            ],
+            "description": "A simple dotenv library for PHP",
+            "homepage": "https://dikki.website/components/dotenv",
+            "keywords": [
+                "dotenv"
+            ],
+            "support": {
+                "issues": "https://github.com/namankumar80510/DikkiDotEnv/issues",
+                "source": "https://github.com/namankumar80510/DikkiDotEnv/tree/2.0.0"
+            },
+            "time": "2024-11-22T06:35:43+00:00"
         },
         {
             "name": "laminas/laminas-diactoros",

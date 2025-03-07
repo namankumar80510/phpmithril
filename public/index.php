@@ -1,14 +1,23 @@
 <?php
 
 declare(strict_types=1);
+use Dikki\DotEnv\DotEnv;
 
 require __DIR__ . '/../vendor/autoload.php';
-
-ini_set('display_errors', '1');
 
 use App\Libraries\ApiResponseStrategy;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+
+(new DotEnv(__DIR__ . '/../'))->load();
+
+if (getenv('APP_ENV') == 'dev') {
+    error_reporting(E_ALL);
+    ini_set('display_errors', '1');
+    define('ENV', 'dev');
+} else {
+    define('ENV', 'prod');
+}
 
 $request = Laminas\Diactoros\ServerRequestFactory::fromGlobals(
     $_SERVER,
