@@ -3,13 +3,11 @@
 declare(strict_types=1);
 use Dikki\DotEnv\DotEnv;
 
-require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../backend/vendor/autoload.php';
 
 use App\Libraries\ApiResponseStrategy;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
 
-(new DotEnv(__DIR__ . '/../'))->load();
+(new DotEnv(__DIR__ . '/../backend/'))->load();
 
 if (getenv('APP_ENV') == 'dev') {
     error_reporting(E_ALL);
@@ -31,13 +29,7 @@ $router = new League\Route\Router;
 $router->setStrategy(new ApiResponseStrategy(new \Laminas\Diactoros\ResponseFactory()));
 
 // map a route
-$router->map('GET', '/api/v1/test', function (ServerRequestInterface $request): array {
-    return [
-        'message' => 'it works',
-        'status' => 200,
-        'method' => $request->getMethod(),
-    ];
-});
+require_once __DIR__ . '/../backend/src/routes.php';
 
 $response = $router->dispatch($request);
 
