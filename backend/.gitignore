@@ -2,3 +2,5 @@
 .vscode/
 vendor/
 .env
+tmp/cache/*
+!tmp/cache/.gitkeep
