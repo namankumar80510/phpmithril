@@ -1,11 +1,7 @@
 <?php
 
-use Psr\Http\Message\ServerRequestInterface;
+use App\Controllers\TestController;
 
-$router->map('GET', '/api/v1/test', function (ServerRequestInterface $request): array {
-    return [
-        'message' => 'it works',
-        'status' => 200,
-        'method' => $request->getMethod(),
-    ];
+$router->group('/api/v1', function ($router) {
+    $router->get('/test', [TestController::class, 'index'])->setName('test');
 });

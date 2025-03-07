@@ -2,7 +2,7 @@
 
 declare(strict_types= 1);
 
-namespace App\Libraries;
+namespace App\Libraries\Config;
 
 use Dikki\Config\ConfigFetcher;
 
@@ -12,7 +12,7 @@ class Config
 
     public function __construct()
     {
-        $this->config = new ConfigFetcher(__DIR__ . '/../../config');
+        $this->config = new ConfigFetcher(__DIR__ . '/../../../config');
     }
 
     public function get(string $key, $default = null)

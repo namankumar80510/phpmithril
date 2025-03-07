@@ -5,7 +5,8 @@ use Dikki\DotEnv\DotEnv;
 
 require __DIR__ . '/../backend/vendor/autoload.php';
 
-use App\Libraries\ApiResponseStrategy;
+use App\Libraries\API\ApiResponseStrategy;
+use League\Container\Container;
 
 (new DotEnv(__DIR__ . '/../backend/'))->load();
 
@@ -25,8 +26,10 @@ $request = Laminas\Diactoros\ServerRequestFactory::fromGlobals(
     $_FILES
 );
 
+$container = new Container();
 $router = new League\Route\Router;
-$router->setStrategy(new ApiResponseStrategy(new \Laminas\Diactoros\ResponseFactory()));
+$router->setStrategy(new ApiResponseStrategy(new \Laminas\Diactoros\ResponseFactory())
+    ->setContainer($container));
 
 // map a route
 require_once __DIR__ . '/../backend/src/routes.php';

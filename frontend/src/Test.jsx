@@ -1,12 +1,12 @@
 import m from "mithril";
 import { Layout } from "./views/Layout";
-import { UserService } from "./services/api";
+import { TestService } from "./services/api";
 
-const UsersView = {
+const TestViews = {
     view: ({ attrs: { data, error } }) => (
         <Layout>
             <div class="card">
-                <h1>Users</h1>
+                <h1>Test</h1>
 
                 {error ? (
                     <div class="error-message">
@@ -33,7 +33,7 @@ const UsersView = {
                                         {data.status}
                                     </span>
                                 </td>
-                                <td>{data.method}</td>
+                                <td>{data.data.method}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -43,18 +43,18 @@ const UsersView = {
     )
 };
 
-export const Users = {
+export const Test = {
     data: null,
     error: null,
 
     oninit: async () => {
-        const result = await UserService.getUsers();
-        Users.error = result.error;
-        Users.data = result.error ? null : result;
+        const result = await TestService.getTest();
+        Test.error = result.error;
+        Test.data = result.error ? null : result;
         m.redraw();
     },
 
     view: () => (
-        <UsersView data={Users.data} error={Users.error} />
+        <TestViews data={Test.data} error={Test.error} />
     )
 };

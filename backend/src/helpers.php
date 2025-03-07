@@ -1,6 +1,7 @@
 <?php
 
-use App\Libraries\Config;
+use App\Libraries\API\ApiDataLibrary;
+use App\Libraries\Config\Config;
 use League\Plates\Engine;
 
 function view(string $template, array $data = []): string
@@ -26,4 +27,9 @@ function vite_assets()
         <script type="module" src="{$config['dev']}"></script>
         HTML;
     }
+}
+
+function setData(array $data, string $message = 'success', int $status = 200): array
+{
+    return new ApiDataLibrary()->setData($data, $message, $status);
 }
