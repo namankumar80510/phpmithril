@@ -7,15 +7,14 @@ export default defineConfig({
     jsxFragment: "'['",
   },
   build: {
-    cssFile: "style.css",
-    outDir: "dist",
+    emptyOutDir: true, // Prevents clearing non-asset files
+    outDir: "../public/dist",
     rollupOptions: {
       output: {
-        entryFileNames: `build/[name].js`,
-        chunkFileNames: `build/[name].js`,
-        assetFileNames: `build/[name].[ext]`,
+        entryFileNames: `[name].js`,
+        chunkFileNames: `[name].js`,
+        assetFileNames: `[name].[ext]`,
       },
     },
   },
 });
-

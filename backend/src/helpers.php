@@ -10,5 +10,20 @@ function view(string $template, array $data = []): string
 
 function config(string $key, $default = null)
 {
-    return new Config()->$key($default);
+    return new Config()->get($key, $default);
+}
+
+function vite_assets()
+{
+    $config = config('assets');
+    if (ENV == 'prod') {
+        echo <<<HTML
+        <link rel="stylesheet" href="{$config['prod']['css']}">
+        <script type="module" crossorigin src="{$config['prod']['js']}"></script>
+        HTML;
+    } else {
+        echo <<<HTML
+        <script type="module" src="{$config['dev']}"></script>
+        HTML;
+    }
 }
