@@ -9,7 +9,8 @@
         "league/plates": "^3.6",
         "league/route": "^6.2",
         "nette/caching": "^3.3",
-        "nette/utils": "^4.0"
+        "nette/utils": "^4.0",
+        "symfony/console": "^7.2"
     },
     "autoload": {
         "psr-4": {
