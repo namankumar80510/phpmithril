@@ -3,12 +3,12 @@
 declare(strict_types=1);
 use Dikki\DotEnv\DotEnv;
 
-require __DIR__ . '/../backend/vendor/autoload.php';
+require __DIR__ . '/../api/vendor/autoload.php';
 
 use App\Libraries\API\ApiResponseStrategy;
 use League\Container\Container;
 
-(new DotEnv(__DIR__ . '/../backend/'))->load();
+(new DotEnv(__DIR__ . '/../api/'))->load();
 
 if (getenv('APP_ENV') == 'dev') {
     error_reporting(E_ALL);
@@ -32,7 +32,7 @@ $router->setStrategy(new ApiResponseStrategy(new \Laminas\Diactoros\ResponseFact
     ->setContainer($container));
 
 // map a route
-require_once __DIR__ . '/../backend/src/routes.php';
+require_once __DIR__ . '/../api/src/routes.php';
 
 $response = $router->dispatch($request);
 
