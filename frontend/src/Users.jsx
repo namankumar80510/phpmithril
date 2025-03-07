@@ -5,35 +5,40 @@ import { UserService } from "./services/api";
 const UsersView = {
     view: ({ attrs: { data, error } }) => (
         <Layout>
-            <h1>Users</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Message</th>
-                        <th>Status</th>
-                        <th>Method</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {error ? (
-                        <tr>
-                            <td colspan="2">Error: {error}</td>
-                        </tr>
-                    ) : !data ? (
-                        <tr>
-                            <td>Loading bitch...</td>
-                            <td>Loading...</td>
-                            <td>Loading...</td>
-                        </tr>
-                    ) : (
-                        <tr>
-                            <td>{data.message}</td>
-                            <td>{data.status}</td>
-                            <td>{data.method}</td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
+            <div class="card">
+                <h1>Users</h1>
+
+                {error ? (
+                    <div class="error-message">
+                        Error: {error}
+                    </div>
+                ) : !data ? (
+                    <div class="loading">
+                        Loading user data...
+                    </div>
+                ) : (
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Message</th>
+                                <th>Status</th>
+                                <th>Method</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{data.message}</td>
+                                <td>
+                                    <span class={`status ${data.status === 200 ? 'status-success' : 'status-error'}`}>
+                                        {data.status}
+                                    </span>
+                                </td>
+                                <td>{data.method}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                )}
+            </div>
         </Layout>
     )
 };
