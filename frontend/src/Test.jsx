@@ -6,37 +6,65 @@ const TestViews = {
     view: ({ attrs: { data, error } }) => (
         <Layout>
             <div class="card">
-                <h1>Test</h1>
+                <h1>Test API Response</h1>
 
                 {error ? (
                     <div class="error-message">
-                        Error: {error}
+                        Unable to fetch data: {error}
                     </div>
                 ) : !data ? (
                     <div class="loading">
-                        Loading user data...
+                        Loading data from API...
                     </div>
                 ) : (
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Message</th>
-                                <th>Status</th>
-                                <th>Method</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>{data.message}</td>
-                                <td>
-                                    <span class={`status ${data.status === 200 ? 'status-success' : 'status-error'}`}>
-                                        {data.status}
-                                    </span>
-                                </td>
-                                <td>{data.data.method}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div>
+                        <div class="api-status-header">
+                            <div class="api-status-info">
+                                <span class={`lozenge ${data.status === 200 ? 'lozenge-success' : 'lozenge-removed'}`}>
+                                    Status {data.status}
+                                </span>
+                                <span class="api-method">{data.data.method}</span>
+                            </div>
+                        </div>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Property</th>
+                                    <th>Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Message</td>
+                                    <td>{data.message}</td>
+                                </tr>
+                                <tr>
+                                    <td>Status</td>
+                                    <td>
+                                        <span class={`status ${data.status === 200 ? 'status-success' : 'status-error'}`}>
+                                            {data.status}
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Method</td>
+                                    <td>{data.data.method}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="button-group">
+                            <button class="button button-primary" onclick={() => {
+                                Test.data = null;
+                                Test.error = null;
+                                m.redraw();
+                                Test.oninit();
+                            }}>
+                                Refresh Data
+                            </button>
+                        </div>
+                    </div>
                 )}
             </div>
         </Layout>
@@ -48,9 +76,13 @@ export const Test = {
     error: null,
 
     oninit: async () => {
-        const result = await TestService.getTest();
-        Test.error = result.error;
-        Test.data = result.error ? null : result;
+        try {
+            const result = await TestService.getTest();
+            Test.error = result.error;
+            Test.data = result.error ? null : result;
+        } catch (err) {
+            Test.error = err.message || "Unknown error occurred";
+        }
         m.redraw();
     },
 
